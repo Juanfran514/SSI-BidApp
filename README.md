@@ -2,7 +2,7 @@
 GitHub for SSI App
 
 Cada uno tiene su propia rama, por favor trabajad en ella. 
-Vamos a trabajar sobre el proyecto que presentamos en la ordinaria que se encuentra en main/base/BidApp
+Vamos a trabajar sobre el proyecto que presentamos en la ordinaria que se encuentra en main/SSI.zip
 
 Las tareas a relaizar son las siguientes:
 
