@@ -10,7 +10,7 @@ Las tareas a relaizar son las siguientes:
 2. Crear un servidor con su logica de validacion de los bloques que permita que los usuarios que conecten desde otros dispositivos
 3. Añadir el registro mediante claves con el USB para los vendedores 
 
-Habia pensado en que Guille y yo nos encargasemos de crear el servidor y la base de datos ay que es mas facil que lo probemos porque vivimos juntos y nada mas los acabemos podemos dividirnos y ayudar con las otras.
+Habia pensado en que Guille y yo nos encargasemos de crear el servidor y la base de datos ya que es mas facil que lo probemos porque vivimos juntos y nada mas los acabemos podemos dividirnos y ayudar con las otras.
 
 Meriam y Alberto decidid entre vosotros que haceis cada uno si implemntar el registro USB o la blockchain.
 
