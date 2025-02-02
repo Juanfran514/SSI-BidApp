@@ -20,7 +20,7 @@ public class BidManager {
         this.bidBlockchain = new Blockchain(difficulty);
     }
 
-    public static boolean deleteBid(int bidId) {
+    public static boolean deleteBid(int bidId) throws Exception {
         try (Connection connection = DatabaseManager.getConnection()) {
             String sql = "DELETE FROM bids WHERE bid_id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {

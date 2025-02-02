@@ -162,12 +162,11 @@ public class AuctionApp {
         JButton createAuctionButton = new JButton("Create auction");
         createAuctionButton.addActionListener(e -> {
 			try {
-				try {
-					showCreateAuctionForm();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			} catch (ParseException e1) {
+				showCreateAuctionForm();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});
@@ -204,7 +203,7 @@ public class AuctionApp {
         frame.repaint();
     }
 
-    private void showCreateAuctionForm() throws ParseException, SQLException {
+    private void showCreateAuctionForm() throws Exception {
         JPanel createAuctionPanel = new JPanel(new GridLayout(4, 2, 10, 10));
 
         JTextField auctionNameField = new JTextField();

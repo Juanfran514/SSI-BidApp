@@ -29,7 +29,7 @@ public class AuctionManager {
 	}
 
 	public void createAuction(int sellerId, String title, String description, double startPrice,
-			LocalDateTime startDate, LocalDateTime endDate) {
+			LocalDateTime startDate, LocalDateTime endDate) throws Exception {
 		try (Connection connection = DatabaseManager.getConnection()) {
 			String sql = "INSERT INTO auctions (seller_id, title, description, start_price, current_price, start_date, end_date, status, created_at) "
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?, 'active', NOW())";
@@ -402,7 +402,7 @@ public class AuctionManager {
 		return success;
 	}
 
-	public boolean deleteAuction(int auctionId) {
+	public boolean deleteAuction(int auctionId) throws Exception {
 		try (Connection connection = DatabaseManager.getConnection()) {
 			String deleteBidsSql = "DELETE FROM bids WHERE auction_id = ?";
 			try (PreparedStatement deleteBidsStmt = connection.prepareStatement(deleteBidsSql)) {
@@ -435,7 +435,7 @@ public class AuctionManager {
 		}
 	}
 
-	public void addAuction(Auction auction) {
+	public void addAuction(Auction auction) throws Exception {
 		String auctionDetails = "Subasta añadida: " + auction.toString();
 
 		System.out.println("Adding auction to Blockchain: " + auctionDetails);
@@ -443,7 +443,7 @@ public class AuctionManager {
 		auctionBlockchain.addBlock(auctionDetails);
 	}
 	
-    public void addBlockToBlockchain(String auctionName, String auctionDesc, double initialPrice, String endDateString) {
+    public void addBlockToBlockchain(String auctionName, String auctionDesc, double initialPrice, String endDateString) throws Exception {
         String blockData = "Auction: " + auctionName + ", Description: " + auctionDesc + ", Starting Price " + initialPrice + ", Ending Date: " + endDateString;
 
         String previousHash = auctionBlockchain.getBlockchain().isEmpty() ? "0" : auctionBlockchain.getBlockchain().get(auctionBlockchain.getBlockchain().size() - 1).getHash();

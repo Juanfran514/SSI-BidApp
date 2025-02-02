@@ -41,7 +41,7 @@ public class Blockchain {
         blockchain.add(genesisBlock);
     }
 
-    public void addBlock(String auctionDetails) {
+    public void addBlock(String auctionDetails) throws Exception {
         Block newBlock = new Block(getLatestBlock().getHash(), auctionDetails);
         
         newBlock.mineBlock(difficulty);  

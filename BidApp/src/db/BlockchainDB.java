@@ -1,4 +1,5 @@
 package db;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,14 +9,13 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
 import blockchain.Block;
 
 public class BlockchainDB {
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/auction_db";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "yourpassword";
+    private static final String DB_URL = "jdbc:mysql://testdb.cx8ai0gooz0e.eu-west-3.rds.amazonaws.com:3306/auction_db";
+    private static final String DB_USER = "admin"; // Usuario de RDS
+    private static final String DB_PASSWORD = "admin1234"; // Contraseña de RDS
 
     public static void registerBlockchainEvent(String eventType, String eventData, String blockchainHash) {
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
@@ -32,10 +32,11 @@ public class BlockchainDB {
         }
     }
     
-    public void saveBlock(Block block) {
+    public void saveBlock(Block block) throws Exception {
         String query = "INSERT INTO blockchain (block_hash, previous_block_hash, data, timestamp) VALUES (?, ?, ?, ?)";
         
-        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD); 
+             PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, block.getHash());
             stmt.setString(2, block.getPreviousHash());
             stmt.setTimestamp(4, new Timestamp(block.getTimeStamp()));
@@ -44,7 +45,7 @@ public class BlockchainDB {
             stmt.setString(3, encryptedData);
 
             stmt.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -53,8 +54,8 @@ public class BlockchainDB {
         List<Block> blockchain = new ArrayList<>();
         String query = "SELECT * FROM blockchain ORDER BY id";
 
-        try (Connection conn = DatabaseManager.getConnection(); 
-        		Statement stmt = conn.createStatement()) {
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD); 
+             Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
             
             while (rs.next()) {
